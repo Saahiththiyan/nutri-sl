@@ -13,7 +13,7 @@ const MainNav = ({ className, ...props }) => {
         href='/clients'
         className='text-sm font-medium transition-colors hover:text-primary'
       >
-        FitSL
+        NutriSL
       </Link>
       <Link
         href='/clients'
@@ -38,6 +38,12 @@ const MainNav = ({ className, ...props }) => {
         className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
       >
         Chat
+      </Link>
+      <Link
+        href='/nutri-ai'
+        className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
+      >
+        NutriAI
       </Link>
     </nav>
   )

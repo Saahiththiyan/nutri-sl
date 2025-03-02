@@ -3,7 +3,7 @@ import MainNav from '@/components/main-nav'
 import { UserNav } from '@/components/user-nav'
 
 export const metadata = {
-  title: 'FitSL',
+  title: 'NutriSL',
   description: 'Revolutionize diet management'
 }
 

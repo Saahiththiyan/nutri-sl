@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'FitSL',
+  title: 'NutriSL',
   description: 'Revolutionize diet management'
 }
 
