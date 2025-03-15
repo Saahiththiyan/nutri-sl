@@ -31,7 +31,7 @@ const MainNav = ({ className, ...props }) => {
         href='/workout-plans'
         className='text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
       >
-        Workouts
+        Workout plans
       </Link>
       <Link
         href='/chat'
