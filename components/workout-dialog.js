@@ -1,13 +1,16 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter,
+} from "@/components/ui/sheet"
 import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
@@ -33,20 +36,18 @@ const WorkoutDialog = ({getData, workoutPlanId}) => {
 
   }
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}><FaPlus className="mr-2" />Add new workout</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add new workout</DialogTitle>
-          <DialogDescription>
-            Create a new workout
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
+    <Sheet open={open} onOpenChange={setOpen}>
+    <SheetTrigger><Button onClick={() => setOpen(true)}><FaPlus className="mr-2" />Add new workout</Button></SheetTrigger>
+    <SheetContent side={"right"} style={{ maxWidth: '50vw' }}>
+      <SheetHeader>
+        <SheetTitle>Add new workout</SheetTitle>
+        <SheetDescription>
+          Create a new workout
+        </SheetDescription>
+      </SheetHeader>
+      <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               Workout name
             </Label>
             <Input
@@ -58,7 +59,7 @@ const WorkoutDialog = ({getData, workoutPlanId}) => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               No of Sets
             </Label>
             <Input
@@ -70,7 +71,7 @@ const WorkoutDialog = ({getData, workoutPlanId}) => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               No of Reps
             </Label>
             <Input
@@ -82,7 +83,7 @@ const WorkoutDialog = ({getData, workoutPlanId}) => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               Duration (mins)
             </Label>
             <Input
@@ -95,11 +96,11 @@ const WorkoutDialog = ({getData, workoutPlanId}) => {
           </div>
           
         </div>
-        <DialogFooter>
-          <Button type="submit" onClick={() => insertWorkout()}>Create New</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      <SheetFooter>
+        <Button type="submit" onClick={() => insertWorkout()}>Create New</Button>
+      </SheetFooter>
+    </SheetContent>
+    </Sheet>
 
   )
 }

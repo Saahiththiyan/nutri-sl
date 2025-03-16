@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
@@ -77,20 +77,20 @@ const MealPlanDialog = ({getData}) => {
     getData()
   }, [])
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <Button onClick={() => setOpen(true)}><FaPlus className="mr-2" />Create a new meal plan</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add new workout plan</DialogTitle>
-          <DialogDescription>
-            Create a new workout plan
-          </DialogDescription>
-        </DialogHeader>
+      </SheetTrigger>
+      <SheetContent side={"right"} style={{ maxWidth: '50vw' }}>
+        <SheetHeader>
+          <SheetTitle>Add new meal plan</SheetTitle>
+          <SheetDescription>
+            Create a new meal plan
+          </SheetDescription>
+        </SheetHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               Plan name
             </Label>
             <Input
@@ -102,7 +102,7 @@ const MealPlanDialog = ({getData}) => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               Client
             </Label>
             <Select onValueChange={value => setClientId(value)}>
@@ -117,20 +117,19 @@ const MealPlanDialog = ({getData}) => {
             </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="description" className="text-right">Description</Label>
+              <Label htmlFor="description" className="text-left">Description</Label>
               <Textarea id="description" className="col-span-3" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="image" className="text-right">Image</Label>
+            <Label htmlFor="image" className="text-left">Image</Label>
             <Input type="file" id="image" className="col-span-3" onChange={(e) => setImage(e.target.files[0])} />
           </div>
         </div>
-        <DialogFooter>
+        <SheetFooter>
           <Button type="submit" onClick={() => insertWorkoutPlan()}>Create New</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   )
 }
 

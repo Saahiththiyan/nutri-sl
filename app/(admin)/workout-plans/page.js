@@ -4,6 +4,8 @@ import WorkoutPlanList from '@/components/workout-plan-list'
 import React, { useState } from 'react'
 import {supabase} from '@/lib/supabase'
 
+
+
 const WorkoutPlans = () => {
   const [workoutPlans, setWorkoutPlans] = useState(null)
   const getData = async () => {
@@ -21,6 +23,8 @@ const WorkoutPlans = () => {
           </div>
         </div>
         <WorkoutPlanList getData={() => getData()} workoutPlans={workoutPlans}/>
+        
+
       </main>
     </>
   )

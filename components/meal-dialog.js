@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
@@ -73,81 +73,80 @@ const MealDialog = ({getData, mealPlanId}) => {
 
   }
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <Button onClick={() => setOpen(true)}><FaPlus className="mr-2" />Add new meal</Button>
-      </DialogTrigger>
-      <DialogContent style={{ width: '80vw', maxWidth: '1200px', height: '80vh', maxHeight: '800px' }}>
-        <DialogHeader>
-          <DialogTitle>Add new meal</DialogTitle>
-          <DialogDescription>
+      </SheetTrigger>
+      <SheetContent side={"right"} style={{ maxWidth: '50vw' }}>
+        <SheetHeader>
+          <SheetTitle>Add new meal</SheetTitle>
+          <SheetDescription>
             Create a new meal
-          </DialogDescription>
-        </DialogHeader>
+          </SheetDescription>
+        </SheetHeader>
         <div className="grid grid-cols-2 gap-4 py-4">
           <div className="grid gap-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">Meal name</Label>
+              <Label htmlFor="name" className="text-left">Meal name</Label>
               <Input id="name" className="col-span-3" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="weight" className="text-right">Weight</Label>
+              <Label htmlFor="weight" className="text-left">Weight</Label>
               <Input id="weight" className="col-span-3" value={weight} onChange={(e) => setWeight(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="calories" className="text-right">Calories</Label>
+              <Label htmlFor="calories" className="text-left">Calories</Label>
               <Input id="calories" className="col-span-3" value={calories} onChange={(e) => setCalories(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="protein" className="text-right">Protein (g)</Label>
+              <Label htmlFor="protein" className="text-left">Protein (g)</Label>
               <Input id="protein" className="col-span-3" value={protein} onChange={(e) => setProtein(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="carbs" className="text-right">Carbs (g)</Label>
+              <Label htmlFor="carbs" className="text-left">Carbs (g)</Label>
               <Input id="carbs" className="col-span-3" value={carbs} onChange={(e) => setCarbs(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="fat" className="text-right">Fat (g)</Label>
+              <Label htmlFor="fat" className="text-left">Fat (g)</Label>
               <Input id="fat" className="col-span-3" value={fat} onChange={(e) => setFat(e.target.value)} />
             </div>
           </div>
           <div className="grid gap-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="ingredients" className="text-right">Ingredients</Label>
+              <Label htmlFor="ingredients" className="text-left">Ingredients</Label>
               <Textarea id="ingredients" className="col-span-3" value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="preparationMethod" className="text-right">Preparation Method</Label>
+              <Label htmlFor="preparationMethod" className="text-left">Preparation Method</Label>
               <Textarea id="preparationMethod" className="col-span-3" value={preparationMethod} onChange={(e) => setPreparationMethod(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="servingSize" className="text-right">Serving Size</Label>
+              <Label htmlFor="servingSize" className="text-left">Serving Size</Label>
               <Input id="servingSize" className="col-span-3" value={servingSize} onChange={(e) => setServingSize(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="dietaryPreference" className="text-right">Dietary Preference</Label>
+              <Label htmlFor="dietaryPreference" className="text-left">Dietary Preference</Label>
               <Input id="dietaryPreference" className="col-span-3" value={dietaryPreference} onChange={(e) => setDietaryPreference(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="mealTime" className="text-right">Meal Time</Label>
+              <Label htmlFor="mealTime" className="text-left">Meal Time</Label>
               <Input id="mealTime" className="col-span-3" value={mealTime} onChange={(e) => setMealTime(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="notes" className="text-right">Notes</Label>
+              <Label htmlFor="notes" className="text-left">Notes</Label>
               <Textarea id="notes" className="col-span-3" value={notes} onChange={(e) => setNotes(e.target.value)} />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="image" className="text-right">Image</Label>
+              <Label htmlFor="image" className="text-left">Image</Label>
               <Input type="file" id="image" className="col-span-3" onChange={(e) => setImage(e.target.files[0])} />
             </div>
           </div>
         </div>
-        <DialogFooter>
+        <SheetFooter>
           <Button type="submit" onClick={() => insertMeal()}>Create New</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   )
 }
 

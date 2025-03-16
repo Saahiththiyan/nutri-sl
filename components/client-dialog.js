@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
@@ -27,6 +27,7 @@ const ClientDialog = () => {
   const [weight, setWeight] = useState('')
   const [height, setHeight] = useState('')
   const [targetWeight, setTargetWeight] = useState('')
+  const [open, setOpen] = useState(false)
   const router = useRouter()
   const insertClient = async () => {
     const password = `${firstname}1234`
@@ -48,20 +49,20 @@ const ClientDialog = () => {
     router.refresh()
   }
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button><FaPlus className="mr-2" />Create a new client</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add new client</DialogTitle>
-          <DialogDescription>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button onClick={() => setOpen(true)}><FaPlus className="mr-2" />Create a new client</Button>
+      </SheetTrigger>
+      <SheetContent side={"right"} style={{ maxWidth: '50vw' }}>
+        <SheetHeader>
+          <SheetTitle>Add new client</SheetTitle>
+          <SheetDescription>
             Create a new client to train
-          </DialogDescription>
-        </DialogHeader>
+          </SheetDescription>
+        </SheetHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="firstname" className="text-right">
+            <Label htmlFor="firstname" className="text-left">
               First name
             </Label>
             <Input
@@ -73,7 +74,7 @@ const ClientDialog = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="lastname" className="text-right">
+            <Label htmlFor="lastname" className="text-left">
               Last name
             </Label>
             <Input
@@ -85,7 +86,7 @@ const ClientDialog = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
+            <Label htmlFor="email" className="text-left">
               Email
             </Label>
             <Input
@@ -98,7 +99,7 @@ const ClientDialog = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="age" className="text-right">
+            <Label htmlFor="age" className="text-left">
               Age
             </Label>
             <Input
@@ -109,7 +110,7 @@ const ClientDialog = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="gender" className="text-right">
+            <Label htmlFor="gender" className="text-left">
               Gender
             </Label>
             <Select onValueChange={value => setGender(value)}>
@@ -124,7 +125,7 @@ const ClientDialog = () => {
             </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="weight" className="text-right">
+            <Label htmlFor="weight" className="text-left">
               Current weight
             </Label>
             <Input
@@ -135,7 +136,7 @@ const ClientDialog = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="targetWeight" className="text-right">
+            <Label htmlFor="targetWeight" className="text-left">
               Target weight
             </Label>
             <Input
@@ -146,7 +147,7 @@ const ClientDialog = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="height" className="text-right">
+            <Label htmlFor="height" className="text-left">
               Height
             </Label>
             <Input
@@ -157,20 +158,19 @@ const ClientDialog = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="ristrictions" className="text-right">Dietary ristrictions</Label>
+            <Label htmlFor="ristrictions" className="text-left">Dietary ristrictions</Label>
             <Textarea id="ristrictions" className="col-span-3" value={ristrictions} onChange={(e) => setRistrictions(e.target.value)} />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="healthIssues" className="text-right">Known health issues</Label>
+            <Label htmlFor="healthIssues" className="text-left">Known health issues</Label>
             <Textarea id="healthIssues" className="col-span-3" value={healthIssues} onChange={(e) => setHealthIssues(e.target.value)} />
           </div>
         </div>
-        <DialogFooter>
+        <SheetFooter>
           <Button type="submit" onClick={insertClient}><FaPlus className="mr-2" />Add</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   )
 }
 

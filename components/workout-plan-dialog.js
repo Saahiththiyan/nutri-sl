@@ -1,6 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter,
+} from "@/components/ui/sheet"
 import {
   Select,
   SelectContent,
@@ -40,20 +48,18 @@ const WorkoutplanDialog = ({getData}) => {
     getData()
   }, [])
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}><FaPlus className="mr-2" />Create new workout plan</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add new workout plan</DialogTitle>
-          <DialogDescription>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger><Button onClick={() => setOpen(true)}><FaPlus className="mr-2" />Create new workout plan</Button></SheetTrigger>
+      <SheetContent side={"right"} style={{ maxWidth: '50vw' }}>
+        <SheetHeader>
+          <SheetTitle>Add new workout plan</SheetTitle>
+          <SheetDescription>
             Create a new workout plan
-          </DialogDescription>
-        </DialogHeader>
+          </SheetDescription>
+        </SheetHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               Plan name
             </Label>
             <Input
@@ -65,11 +71,11 @@ const WorkoutplanDialog = ({getData}) => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="name" className="text-left">
               Client
             </Label>
-            <Select onValueChange={value => setClientId(value)}>
-              <SelectTrigger className="w-[180px]">
+            <Select  onValueChange={value => setClientId(value)}>
+              <SelectTrigger className="col-span-3">
                 <SelectValue placeholder="Select client" />
               </SelectTrigger>
               <SelectContent>
@@ -80,11 +86,11 @@ const WorkoutplanDialog = ({getData}) => {
             </Select>
           </div>
         </div>
-        <DialogFooter>
+        <SheetFooter>
           <Button type="submit" onClick={() => insertWorkoutPlan()}>Create New</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
 
   )
 }
