@@ -31,7 +31,7 @@ const MealPlanDialog = ({getData}) => {
     const filePath = `meal-plans/${fileName}`
 
     let { error: uploadError } = await supabase.storage
-      .from('fitsl')
+      .from('nutrisl')
       .upload(filePath, file)
 
     if (uploadError) {
@@ -39,15 +39,14 @@ const MealPlanDialog = ({getData}) => {
     }
 
     const { data } = supabase.storage
-      .from('fitsl')
+      .from('nutrisl')
       .getPublicUrl(filePath)
 
-    console.log(data.publicUrl);
 
     return data.publicUrl
   }
 
-  const insertWorkoutPlan = async () => {
+  const insertMealPlan = async () => {
     let imageUrl = null
     if (image) {
       try {
@@ -126,7 +125,7 @@ const MealPlanDialog = ({getData}) => {
           </div>
         </div>
         <SheetFooter>
-          <Button type="submit" onClick={() => insertWorkoutPlan()}>Create New</Button>
+          <Button type="submit" onClick={() => insertMealPlan()}>Create New</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>

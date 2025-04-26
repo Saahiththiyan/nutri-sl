@@ -16,7 +16,7 @@ import {
 import { FaPlus } from 'react-icons/fa'
 import { Textarea } from './ui/textarea'
 
-const ClientDialog = () => {
+const ClientDialog = ({getData}) => {
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [age, setAge] = useState()
@@ -28,7 +28,6 @@ const ClientDialog = () => {
   const [height, setHeight] = useState('')
   const [targetWeight, setTargetWeight] = useState('')
   const [open, setOpen] = useState(false)
-  const router = useRouter()
   const insertClient = async () => {
     const password = `${firstname}1234`
     const { data: clientData, error: clientError } = await supabase
@@ -46,7 +45,9 @@ const ClientDialog = () => {
     .from('profiles')
     .update({ username: firstname, full_name: `${firstname} ${lastname}`, client_id: clientData[0].id }) // replace with actual fields to update
     .eq('id', userData.user.id);
-    router.refresh()
+    console.log('insert client');
+    getData()
+    setOpen(false)
   }
   return (
     <Sheet open={open} onOpenChange={setOpen}>

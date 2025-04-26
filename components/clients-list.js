@@ -17,18 +17,9 @@ import { genderList } from '@/data/util'
 import { useRouter } from 'next/navigation'
 import { FaSpinner, FaEye, FaTrash } from 'react-icons/fa'
 
-const ClientsList = () => {
-  const [clients, setClients] = useState(null)
+const ClientsList = ({clients, setClients}) => {
   const [loading, setLoading] = useState(null)
   const router = useRouter()
-
-  useEffect(() => {
-    const getData = async () => {
-      const { data: clients, error } = await supabase.from('clients').select('*')
-      setClients(clients)
-    }
-    getData()
-  }, [])
 
   const deleteClient = async (clientId) => {
     setLoading(clientId)
