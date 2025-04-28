@@ -36,7 +36,7 @@ const Chat = () => {
         const { data: messages, error } = await supabase
           .from('messages')
           .select('*')
-          .or(`sender_id.eq.${selectedUser.profiles[0].id},receiver_id.eq.${selectedUser.profiles[0].id}`)
+          .or(`admin_id.eq.${user?.id},client_id.eq.${selectedUser.profiles[0].id}`)
           .order('created_at', { ascending: true })
         if (error) console.error(error)
         else setMessages(messages)
@@ -47,9 +47,7 @@ const Chat = () => {
       const messageSubscription = supabase
         .channel('public:messages')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {
-          console.log(payload);
-          console.log(messages);
-          if (payload.new.sender_id === selectedUser.profiles[0].id || payload.new.receiver_id === selectedUser.profiles[0].id) {
+          if (payload.new.admin_id === user?.id || payload.new.client_id === selectedUser.profiles[0].id) {
             console.log('message set');
             setMessages(prev => [...prev, payload.new])
           }
@@ -64,7 +62,7 @@ const Chat = () => {
 
   const sendMessage = async () => {
     if (newMessage.trim() !== "") {
-      const { error } = await supabase.from('messages').insert([{ sender_id: user?.id, receiver_id: selectedUser.profiles[0].id, content: newMessage }])
+      const { error } = await supabase.from('messages').insert([{ admin_id: user?.id, client_id: selectedUser.profiles[0].id, content: newMessage, sender: 'admin' }])
       if (error) console.error(error)
       else setNewMessage("")
     }
@@ -90,14 +88,17 @@ const Chat = () => {
         {/* Messages */}
         <div className="flex flex-col flex-1 overflow-y-auto space-y-4">
           {messages.map((message, index) => (
+            (message.admin_id === user?.id && message.client_id === selectedUser.profiles[0].id) && (
             <div
               key={index}
               className={`max-w-3/4 p-3 rounded-md ${
-                message.sender_id === user?.id ? 'self-end bg-green-100' : 'self-start bg-gray-200'
+                message.sender === 'admin' ? 'self-end bg-green-100' : 'self-start bg-gray-200'
               }`}
             >
+              {console.log(message.admin_id, user?.id)}
               <span>{message.content}</span>
             </div>
+            )
           ))}
         </div>
 
