@@ -45,15 +45,15 @@ export function UserNav () {
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
           <Avatar className='h-8 w-8'>
-            <AvatarImage src={profile?.avatar_url} alt={profile?.username} />
-            <AvatarFallback>{profile?.full_name}</AvatarFallback>
+            <AvatarImage src={`https://static.vecteezy.com/system/resources/previews/036/594/092/non_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg`} alt={user?.email} />
+            <AvatarFallback>{user?.email}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>{profile?.full_name}</p>
+            <p className='text-sm font-medium leading-none'>{user?.email}</p>
             <p className='text-xs leading-none text-muted-foreground'>
               {user?.email}
             </p>
